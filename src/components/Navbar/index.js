@@ -2,7 +2,6 @@ import React from 'react';
 import S from './Navbar.module.scss';
 import LogoSrc from 'assets/logo.png';
 
-import classNames from 'classnames';
 import { RiShoppingCart2Line, RiShoppingCartFill } from 'react-icons/ri';
 import Search from 'components/Search';
 import { Link, useLocation, useNavigate } from 'react-router-dom';

@@ -15,9 +15,8 @@ const Category = () => {
     const regexp = new RegExp(state.search, 'i');
 
     return {
-      category: state.categories.find(
-        (category) => category.id === categoryName,
-      ),
+      category:
+        state.categories.find((category) => category.id === categoryName) || {},
       items: state.items.filter(
         (item) => item.category === categoryName && item.title.match(regexp),
       ),

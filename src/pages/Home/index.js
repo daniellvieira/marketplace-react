@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from 'components/Header';
 import watchSrc from 'assets/watch.png';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from 'components/Button';
+import { getCategories } from 'store/reducers/categories';
 
 import S from './Home.module.scss';
-import Button from 'components/Button';
+import { getItems } from 'store/reducers/items';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { categories } = useSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(getCategories());
+    dispatch(getItems());
+  }, [dispatch]);
 
   return (
     <div>
