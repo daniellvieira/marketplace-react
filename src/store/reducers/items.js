@@ -292,9 +292,14 @@ export const itemsSlice = createSlice({
     createItem: (state, { payload }) => {
       state.push({ ...payload, id: uuid() });
     },
+    changeItem: (state, { payload }) => {
+      // https://immerjs.github.io/immer/update-patterns/#array-mutations
+      const index = state.findIndex((item) => item.id === payload.id);
+      if (index !== -1) Object.assign(state[index], payload.item);
+    },
   },
 });
 
-export const { changeWishList, createItem } = itemsSlice.actions;
+export const { changeWishList, createItem, changeItem } = itemsSlice.actions;
 
 export default itemsSlice.reducer;

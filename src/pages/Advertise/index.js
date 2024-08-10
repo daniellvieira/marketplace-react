@@ -7,6 +7,7 @@ import Button from 'components/Button';
 import { useForm } from 'react-hook-form';
 import { createItem } from 'store/reducers/items';
 import { useParams } from 'react-router-dom';
+import Input from 'components/Input';
 
 import S from './Advertise.module.scss';
 
@@ -35,7 +36,7 @@ const Advertise = () => {
         description="Advertise your product on the best website in Brazil"
       />
       <form className={S.form} onSubmit={handleSubmit(createSubmit)}>
-        <input
+        <Input
           className={errors.title ? S['input-error'] : ''}
           {...register('title', { required: 'title is required' })}
           placeholder="Title"
