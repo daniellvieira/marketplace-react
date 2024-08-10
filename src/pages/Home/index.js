@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import S from './Home.module.scss';
+import Button from 'components/Button';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -17,7 +18,9 @@ const Home = () => {
         description="Buy different types of products on the best website in the world"
         imageSrc={watchSrc}
         className={S.header}
-      />
+      >
+        <Button onClick={() => navigate('/advertise')}>Advertise Here</Button>
+      </Header>
       <div className={S.categories}>
         <div className={S['categories-title']}>
           <h1>Categories</h1>

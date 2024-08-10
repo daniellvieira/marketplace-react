@@ -5,11 +5,13 @@ import Button from 'components/Button';
 // https://react-hook-form.com/
 // https://react-hook-form.com/get-started#SchemaValidation
 import { useForm } from 'react-hook-form';
+import { createItem } from 'store/reducers/items';
+import { useParams } from 'react-router-dom';
 
 import S from './Advertise.module.scss';
-import { createItem } from 'store/reducers/items';
 
 const Advertise = () => {
+  const { categoryName = '' } = useParams();
   const dispatch = useDispatch();
   const categories = useSelector((state) =>
     state.categories.map(({ name, id }) => ({ name, id })),
@@ -17,7 +19,7 @@ const Advertise = () => {
 
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
-      category: '',
+      category: categoryName,
     },
   });
   const { errors } = formState;
@@ -70,6 +72,7 @@ const Advertise = () => {
 
         <select
           className={errors.category ? S['input-error'] : ''}
+          disabled={!!categoryName}
           {...register('category', {
             required: 'category is required',
           })}
@@ -94,6 +97,7 @@ const Advertise = () => {
           className={errors.price ? S['input-error'] : ''}
           {...register('price', {
             required: 'price is required',
+            valueAsNumber: true,
           })}
           type="number"
           placeholder="Price"

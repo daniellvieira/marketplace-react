@@ -284,7 +284,7 @@ export const itemsSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     changeWishList: (state, { payload }) => {
-      state = state.map((item) => {
+      state.map((item) => {
         if (item.id === payload) item.favorite = !item.favorite;
         return item;
       });

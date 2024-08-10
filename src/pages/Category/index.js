@@ -1,12 +1,14 @@
 import Header from 'components/Header';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import S from './Category.module.css';
 import Item from 'components/Item';
+import Button from 'components/Button';
 
 const Category = () => {
+  const navigate = useNavigate();
   const { categoryName } = useParams();
 
   const { category, items } = useSelector((state) => {
@@ -28,7 +30,11 @@ const Category = () => {
         title={category.name}
         description={category.description}
         imageSrc={category.header}
-      />
+      >
+        <Button onClick={() => navigate(`/advertise/${categoryName}`)}>
+          Advertise Here
+        </Button>
+      </Header>
 
       <div className={S.items}>
         {items?.map((item) => (
