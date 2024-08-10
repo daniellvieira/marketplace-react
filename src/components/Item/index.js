@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import {
   AiOutlineHeart,
   AiFillHeart,
@@ -6,10 +6,11 @@ import {
   AiFillMinusCircle,
   AiOutlineCheck,
   AiFillEdit,
+  AiFillCloseCircle,
 } from 'react-icons/ai';
 import { FaCartPlus } from 'react-icons/fa';
 
-import { changeItem, changeWishList } from 'store/reducers/items';
+import { changeItem, changeWishList, deleteItem } from 'store/reducers/items';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCart, changeAmount } from 'store/reducers/cart';
 import Input from 'components/Input';
@@ -77,6 +78,12 @@ const Item = (props) => {
         [S.itemInCart]: cart,
       })}
     >
+      <AiFillCloseCircle
+        {...iconProps}
+        className={`${S['item-action']} ${S['item-delete']}`}
+        onClick={() => dispatch(deleteItem(id))}
+      />
+
       <div className={S['item-image']}>
         <img src={photo} alt={title} />
       </div>
@@ -143,4 +150,4 @@ const Item = (props) => {
   );
 };
 
-export default Item;
+export default memo(Item);

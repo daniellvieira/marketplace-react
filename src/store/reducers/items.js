@@ -295,11 +295,18 @@ export const itemsSlice = createSlice({
     changeItem: (state, { payload }) => {
       // https://immerjs.github.io/immer/update-patterns/#array-mutations
       const index = state.findIndex((item) => item.id === payload.id);
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
       if (index !== -1) Object.assign(state[index], payload.item);
+    },
+    deleteItem: (state, { payload }) => {
+      const index = state.findIndex((item) => item.id === payload);
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+      if (index !== -1) state.splice(index, 1);
     },
   },
 });
 
-export const { changeWishList, createItem, changeItem } = itemsSlice.actions;
+export const { changeWishList, createItem, changeItem, deleteItem } =
+  itemsSlice.actions;
 
 export default itemsSlice.reducer;
