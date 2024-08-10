@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from 'components/Header';
 import Button from 'components/Button';
@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import Input from 'components/Input';
 
 import S from './Advertise.module.scss';
+import { getCategory, getListCategories } from 'store/reducers/categories';
 
 const Advertise = () => {
   const { categoryName = '' } = useParams();
@@ -28,6 +29,10 @@ const Advertise = () => {
   const createSubmit = (data) => {
     dispatch(createItem(data));
   };
+
+  useEffect(() => {
+    dispatch(categoryName ? getCategory(categoryName) : getListCategories());
+  }, [dispatch, categoryName]);
 
   return (
     <div className={S.container}>

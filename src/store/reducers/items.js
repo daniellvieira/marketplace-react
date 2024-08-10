@@ -29,6 +29,9 @@ export const itemsSlice = createSlice({
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
       if (index !== -1) state.splice(index, 1);
     },
+    addItems: (state, { payload }) => {
+      state.push(...payload);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getItems.fulfilled, (_state, { payload }) => {
@@ -37,7 +40,7 @@ export const itemsSlice = createSlice({
   },
 });
 
-export const { changeWishList, createItem, changeItem, deleteItem } =
+export const { changeWishList, createItem, changeItem, deleteItem, addItems } =
   itemsSlice.actions;
 
 export default itemsSlice.reducer;

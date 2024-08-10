@@ -1,15 +1,22 @@
 import Header from 'components/Header';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getCategory } from 'store/reducers/categories';
 
-import S from './Category.module.css';
 import Item from 'components/Item';
 import Button from 'components/Button';
 
+import S from './Category.module.css';
+
 const Category = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { categoryName } = useParams();
+
+  useEffect(() => {
+    dispatch(getCategory(categoryName));
+  }, [dispatch, categoryName]);
 
   const { category, items } = useSelector((state) => {
     const regexp = new RegExp(state.search, 'i');

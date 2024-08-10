@@ -1,30 +1,52 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
+import {
+  add,
+  addAllCategories,
+  getCategory,
+  getListCategories,
+} from 'store/reducers/categories';
+import createTask from './utils/createTask';
 import categoriesService from 'services/categories';
-import { addAllCategories, loadCategories } from 'store/reducers/categories';
-import { createStandaloneToast } from '@chakra-ui/react';
 
-export const listener = createListenerMiddleware();
-const { toast } = createStandaloneToast();
+export const categoriesListener = createListenerMiddleware();
 
-listener.startListening({
-  actionCreator: loadCategories,
-  effect: async (action, { dispatch, fork }) => {
-    const task = fork(async (api) => {
-      return await categoriesService.search();
+categoriesListener.startListening({
+  actionCreator: getListCategories,
+  effect: async (_action, { dispatch, fork, unsubscribe }) => {
+    const response = await createTask({
+      dispatch,
+      fork,
+      action: addAllCategories,
+      search: categoriesService.search,
+      messages: {
+        loading: 'Loading categories.',
+        success: 'Categories loaded.',
+      },
     });
-
-    const response = await task.result;
-    if (response.status === 'ok') {
-      dispatch(addAllCategories(response.value));
-      toast({
-        title: 'Categories loaded.',
-        description: "We've loaded all categories.",
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-      });
-    }
+    if (response.status === 'ok') unsubscribe();
   },
 });
 
-export default listener.middleware;
+categoriesListener.startListening({
+  actionCreator: getCategory,
+  effect: async (action, { dispatch, fork, getState }) => {
+    const { categories } = getState();
+    const categoryName = action.payload;
+    const isLoaded = categories.some(
+      (category) => category.id === categoryName,
+    );
+
+    if (isLoaded) return;
+    await createTask({
+      dispatch,
+      fork,
+      action: add,
+      search: () => categoriesService.get(categoryName),
+      messages: {
+        loading: `Loading category ${categoryName}.`,
+        success: `Category ${categoryName} loaded.`,
+      },
+    });
+  },
+});
+export default categoriesListener.middleware;

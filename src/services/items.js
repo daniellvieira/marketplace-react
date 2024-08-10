@@ -5,6 +5,10 @@ const itemsService = {
     const response = await instance.get('/items');
     return response.data;
   },
+  getByCategory: async (categoryName) => {
+    const response = await instance.get(`/items?category=${categoryName}`);
+    return response.data;
+  },
 };
 
 export default itemsService;

@@ -5,7 +5,8 @@ import { resetCart } from './cart';
 
 const { toast } = createStandaloneToast();
 
-export const loadCategories = createAction('categories/load');
+export const getListCategories = createAction('categories/getList');
+export const getCategory = createAction('categories/get');
 
 // https://redux-toolkit.js.org/api/createAsyncThunk
 export const getCategories = createAsyncThunk(
@@ -23,39 +24,24 @@ export const categoriesSlice = createSlice({
     addAllCategories: (state, { payload }) => {
       return payload;
     },
+    add: (state, { payload }) => {
+      state.push(payload);
+    },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getCategories.pending, (_state, { payload }) => {
-        toast({
-          title: 'Loading categories.',
-          description: "We're loading you categories.",
-          status: 'loading',
-          duration: 2000,
-          isClosable: true,
-        });
-      })
-      .addCase(getCategories.rejected, (_state, { payload }) => {
-        toast({
-          title: 'An error occurred.',
-          description: 'Unable to loaded categories.',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-        });
-      })
-      .addCase(resetCart.type, (_state, { payload }) => {
-        toast({
-          title: 'Checkout finished.',
-          description: 'Your order has been created.',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-        });
+    builder.addCase(resetCart.type, (_state, { payload }) => {
+      toast({
+        title: 'Checkout finished.',
+        description: 'Your order has been created.',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
       });
+    });
   },
 });
 
-export const { incrementByAmount, addAllCategories } = categoriesSlice.actions;
+export const { incrementByAmount, addAllCategories, add } =
+  categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
