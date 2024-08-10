@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import categoriesService from 'services/categories';
 import { createStandaloneToast } from '@chakra-ui/react';
+import { resetCart } from './cart';
 
 const { toast } = createStandaloneToast();
 
@@ -19,7 +20,7 @@ export const categoriesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    const builderReducer = builder
+    builder
       .addCase(getCategories.fulfilled, (_state, { payload }) => {
         toast({
           title: 'Categories loaded.',
@@ -48,8 +49,16 @@ export const categoriesSlice = createSlice({
           duration: 2000,
           isClosable: true,
         });
+      })
+      .addCase(resetCart.type, (_state, { payload }) => {
+        toast({
+          title: 'Checkout finished.',
+          description: 'Your order has been created.',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        });
       });
-    return builderReducer;
   },
 });
 

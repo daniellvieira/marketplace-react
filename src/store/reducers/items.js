@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import itemsService from 'services/items';
 import { v4 as uuid } from 'uuid';
-import { createStandaloneToast } from '@chakra-ui/react';
-
-const { toast } = createStandaloneToast();
 
 // https://redux-toolkit.js.org/api/createAsyncThunk
 export const getItems = createAsyncThunk('items/search', itemsService.search);
@@ -34,35 +31,9 @@ export const itemsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getItems.fulfilled, (_state, { payload }) => {
-        toast({
-          title: 'Items loaded.',
-          description: "We've loaded all items.",
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-        });
-        return payload;
-      })
-      .addCase(getItems.pending, (_state, { payload }) => {
-        toast({
-          title: 'Loading items.',
-          description: "We're loading you items.",
-          status: 'loading',
-          duration: 2000,
-          isClosable: true,
-        });
-      })
-      .addCase(getItems.rejected, (_state, { payload }) => {
-        toast({
-          title: 'An error occurred.',
-          description: 'Unable to loaded items.',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-        });
-      });
+    builder.addCase(getItems.fulfilled, (_state, { payload }) => {
+      return payload;
+    });
   },
 });
 
