@@ -4,7 +4,7 @@ import watchSrc from 'assets/watch.png';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/Button';
-import { getCategories } from 'store/reducers/categories';
+import { loadCategories } from 'store/reducers/categories';
 
 import S from './Home.module.scss';
 import { getItems } from 'store/reducers/items';
@@ -15,7 +15,7 @@ const Home = () => {
   const { categories } = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(loadCategories());
     dispatch(getItems());
   }, [dispatch]);
 

@@ -1,9 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import categoriesService from 'services/categories';
 import { createStandaloneToast } from '@chakra-ui/react';
 import { resetCart } from './cart';
 
 const { toast } = createStandaloneToast();
+
+export const loadCategories = createAction('categories/load');
 
 // https://redux-toolkit.js.org/api/createAsyncThunk
 export const getCategories = createAsyncThunk(
@@ -18,20 +20,12 @@ export const categoriesSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
+    addAllCategories: (state, { payload }) => {
+      return payload;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCategories.fulfilled, (_state, { payload }) => {
-        toast({
-          title: 'Categories loaded.',
-          description: "We've loaded all categories.",
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-        });
-
-        return payload;
-      })
       .addCase(getCategories.pending, (_state, { payload }) => {
         toast({
           title: 'Loading categories.',
@@ -62,6 +56,6 @@ export const categoriesSlice = createSlice({
   },
 });
 
-export const { incrementByAmount } = categoriesSlice.actions;
+export const { incrementByAmount, addAllCategories } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;
