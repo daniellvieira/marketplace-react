@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import S from './Payment.module.scss';
 import Header from 'components/Header';
 import Select from 'components/Select';
 import Button from 'components/Button';
 
+import S from './Payment.module.scss';
+import { useDispatch } from 'react-redux';
+import { LOAD_CHECKOUT_REQUEST } from 'store/cart/reducer';
+
 const Payment = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(LOAD_CHECKOUT_REQUEST());
+  }, [dispatch]);
+
   return (
     <div className={S.container}>
       <Header title="Checkout" imageSrc={''} className={S.header} />

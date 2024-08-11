@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import categories from './categories/reducer';
 import items from './reducers/items';
-import cart from './cart/cart';
+import cart from './cart/reducer';
 import search from './reducers/search';
 import categoriesListener from './middlewares/categories';
 import itemsListener from './middlewares/items';

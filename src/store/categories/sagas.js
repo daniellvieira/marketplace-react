@@ -1,14 +1,6 @@
-import {
-  all,
-  call,
-  delay,
-  put,
-  takeEvery,
-  takeLatest,
-} from 'redux-saga/effects';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import {
   addAllCategories,
-  GET_CATEGORY,
   GET_LIST_CATEGORIES,
 } from 'store/categories/reducer';
 import { createStandaloneToast } from '@chakra-ui/react';

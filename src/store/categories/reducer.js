@@ -1,7 +1,7 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import categoriesService from 'services/categories';
 import { createStandaloneToast } from '@chakra-ui/react';
-import { resetCart } from '../cart/cart';
+import { resetCart } from '../cart/reducer';
 
 const { toast } = createStandaloneToast();
 

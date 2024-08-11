@@ -263,5 +263,79 @@
       "id": 25,
       "category": "sound"
     }
+  ],
+
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe"
+    },
+    {
+      "id": 2,
+      "name": "Michael Phelps"
+    }
+  ],
+
+  "cards": [
+    {
+      "name": "Cartão da Maria 1",
+      "bandId": 10,
+      "balance": 300,
+      "userId": 2,
+      "id": "1"
+    },
+    {
+      "name": "Cartão da Maria 2",
+      "bandId": 20,
+      "balance": 500,
+      "userId": 2,
+      "id": "2"
+    },
+    {
+      "name": "Cartão da Maria 3",
+      "bandId": 30,
+      "balance": 1000,
+      "userId": 2,
+      "id": "3"
+    },
+    {
+      "name": "Cartão do João 1",
+      "bandId": 10,
+      "balance": 0,
+      "userId": 1,
+      "id": "4"
+    },
+    {
+      "name": "Cartão do João 2",
+      "bandId": 20,
+      "balance": 200,
+      "userId": 1,
+      "id": "5"
+    },
+    {
+      "name": "Cartão do João 3",
+      "bandId": 30,
+      "balance": 500,
+      "userId": 1,
+      "id": "6"
+    }
+  ],
+
+  "bands": [
+    {
+      "name": "Mastercard",
+      "id": 10,
+      "tax": 1.1
+    },
+    {
+      "name": "Visa",
+      "id": 20,
+      "tax": 1.3
+    },
+    {
+      "name": "Elo",
+      "id": 30,
+      "tax": 1.5
+    }
   ]
 }

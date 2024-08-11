@@ -12,7 +12,7 @@ import { FaCartPlus } from 'react-icons/fa';
 
 import { changeItem, changeWishList, deleteItem } from 'store/reducers/items';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCart, changeAmount } from 'store/cart/cart';
+import { changeCart, changeAmount } from 'store/cart/reducer';
 import Input from 'components/Input';
 import classNames from 'classnames';
 
