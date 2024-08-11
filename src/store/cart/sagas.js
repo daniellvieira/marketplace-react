@@ -1,9 +1,10 @@
-import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { createStandaloneToast } from '@chakra-ui/react';
 import { LOAD_CHECKOUT_REQUEST } from './reducer';
 import usersService from 'services/users';
 import cardsService from 'services/cards';
 import bandsService from 'services/bands';
+import { addUser } from 'store/user/reducer';
 
 const { toast } = createStandaloneToast();
 const TOAST_SHOW_TIME_IN_MILLISECONDS = 2000;
@@ -22,7 +23,8 @@ function* loadCheckout(action) {
       const bandCard = bands.find((band) => parseInt(band.id) === card.bandId);
       return { ...card, tax: bandCard.tax, band: bandCard.name };
     });
-    console.log({ ...user, cards: cardsWithBands });
+
+    yield put(addUser({ ...user, cards: cardsWithBands }));
   } catch (e) {
     toast({
       title: 'An error occurred.',
@@ -37,7 +39,6 @@ function* loadCheckout(action) {
   watcher Saga: Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
 */
-
 function* cartSagas() {
   yield takeLatest(LOAD_CHECKOUT_REQUEST, loadCheckout);
 }

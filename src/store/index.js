@@ -2,13 +2,14 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import categories from './categories/reducer';
 import items from './reducers/items';
 import cart from './cart/reducer';
+import user from './user/reducer';
 import search from './reducers/search';
 import categoriesListener from './middlewares/categories';
 import itemsListener from './middlewares/items';
 import createSagaMiddleware from 'redux-saga';
 import rootSagas from './sagas';
 
-const reducer = combineReducers({ categories, items, cart, search });
+const reducer = combineReducers({ categories, items, cart, search, user });
 const sagaMiddleware = createSagaMiddleware();
 
 const middleware = (getDefaultMiddleware) =>
