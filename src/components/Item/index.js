@@ -38,7 +38,7 @@ const Item = (props) => {
   const dispatch = useDispatch();
 
   const inCart = useSelector((state) =>
-    state.cart.some((itemInCart) => itemInCart.id === id),
+    state.cart.data?.some((itemInCart) => itemInCart.id === id),
   );
 
   const resolveWishList = () => {
