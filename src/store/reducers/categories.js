@@ -5,8 +5,10 @@ import { resetCart } from './cart';
 
 const { toast } = createStandaloneToast();
 
-export const getListCategories = createAction('categories/getList');
-export const getCategory = createAction('categories/get');
+export const GET_LIST_CATEGORIES = createAction(
+  'categories/GET_LIST_CATEGORIES',
+);
+export const GET_CATEGORY = createAction('categories/GET_CATEGORY');
 
 // https://redux-toolkit.js.org/api/createAsyncThunk
 export const getCategories = createAsyncThunk(
@@ -29,7 +31,7 @@ export const categoriesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(resetCart.type, (_state, { payload }) => {
+    builder.addCase(resetCart.type, () => {
       toast({
         title: 'Checkout finished.',
         description: 'Your order has been created.',

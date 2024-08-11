@@ -2,7 +2,7 @@ import Header from 'components/Header';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCategory } from 'store/reducers/categories';
+import { GET_CATEGORY } from 'store/reducers/categories';
 
 import Item from 'components/Item';
 import Button from 'components/Button';
@@ -15,7 +15,7 @@ const Category = () => {
   const { categoryName } = useParams();
 
   useEffect(() => {
-    dispatch(getCategory(categoryName));
+    dispatch(GET_CATEGORY(categoryName));
   }, [dispatch, categoryName]);
 
   const { category, items } = useSelector((state) => {

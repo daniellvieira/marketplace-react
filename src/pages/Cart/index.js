@@ -1,15 +1,14 @@
 import React from 'react';
 import Header from 'components/Header';
-
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Item from 'components/Item';
-import { resetCart } from 'store/reducers/cart';
+import Button from 'components/Button';
+import { useNavigate } from 'react-router-dom';
 
 import S from './Cart.module.css';
-import Button from 'components/Button';
 
 const Cart = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cart, total } = useSelector((state) => {
     let total = 0;
 
@@ -51,7 +50,7 @@ const Cart = () => {
             <strong>R$ {total.toFixed(2)}</strong>
           </span>
         </div>
-        <Button onClick={() => dispatch(resetCart())}>Checkout</Button>
+        <Button onClick={() => navigate('/checkout')}>Checkout</Button>
       </div>
     </div>
   );

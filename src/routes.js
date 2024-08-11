@@ -3,6 +3,7 @@ import Advertise from 'pages/Advertise';
 import Cart from 'pages/Cart';
 import Category from 'pages/Category';
 import Home from 'pages/Home';
+import Payment from 'pages/Payment';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ const Router = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="/advertise/:categoryName" element={<Advertise />} />
           <Route path="/advertise" element={<Advertise />} />
+          <Route path="/checkout" element={<Payment />} />
         </Route>
       </Routes>
     </BrowserRouter>

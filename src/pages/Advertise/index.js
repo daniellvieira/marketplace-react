@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import Input from 'components/Input';
 
 import S from './Advertise.module.scss';
-import { getCategory, getListCategories } from 'store/reducers/categories';
+import { GET_CATEGORY, GET_LIST_CATEGORIES } from 'store/reducers/categories';
 
 const Advertise = () => {
   const { categoryName = '' } = useParams();
@@ -31,7 +31,7 @@ const Advertise = () => {
   };
 
   useEffect(() => {
-    dispatch(categoryName ? getCategory(categoryName) : getListCategories());
+    dispatch(categoryName ? GET_CATEGORY(categoryName) : GET_LIST_CATEGORIES());
   }, [dispatch, categoryName]);
 
   return (
