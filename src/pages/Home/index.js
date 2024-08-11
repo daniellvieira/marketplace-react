@@ -4,7 +4,7 @@ import watchSrc from 'assets/watch.png';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/Button';
-import { GET_LIST_CATEGORIES } from 'store/reducers/categories';
+import { GET_LIST_CATEGORIES } from 'store/categories/reducer';
 
 import S from './Home.module.scss';
 

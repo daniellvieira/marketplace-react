@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
+
+export const LOAD_CHECKOUT_REQUEST = createAction('cart/LOAD_CHECKOUT');
 
 const INITIAL_STATE = [];
 

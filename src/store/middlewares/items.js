@@ -2,7 +2,7 @@ import { createListenerMiddleware } from '@reduxjs/toolkit';
 import itemsService from 'services/items';
 
 import createTask from './utils/createTask';
-import { GET_CATEGORY } from 'store/reducers/categories';
+import { GET_CATEGORY } from 'store/categories/reducer';
 import { addItems } from 'store/reducers/items';
 
 export const itemsListener = createListenerMiddleware();

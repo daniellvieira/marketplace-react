@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import Input from 'components/Input';
 
 import S from './Advertise.module.scss';
-import { GET_CATEGORY, GET_LIST_CATEGORIES } from 'store/reducers/categories';
+import { GET_CATEGORY, GET_LIST_CATEGORIES } from 'store/categories/reducer';
 
 const Advertise = () => {
   const { categoryName = '' } = useParams();

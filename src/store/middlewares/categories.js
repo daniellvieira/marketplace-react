@@ -1,5 +1,5 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
-import { add, GET_CATEGORY } from 'store/reducers/categories';
+import { add, GET_CATEGORY } from 'store/categories/reducer';
 import createTask from './utils/createTask';
 import categoriesService from 'services/categories';
 

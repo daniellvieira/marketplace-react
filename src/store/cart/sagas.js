@@ -1,25 +1,15 @@
-import {
-  all,
-  call,
-  delay,
-  put,
-  takeEvery,
-  takeLatest,
-} from 'redux-saga/effects';
-import {
-  addAllCategories,
-  GET_CATEGORY,
-  GET_LIST_CATEGORIES,
-} from 'store/reducers/categories';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { addAllCategories } from 'store/categories/reducer';
 import { createStandaloneToast } from '@chakra-ui/react';
 import categoriesService from 'services/categories';
+import { LOAD_CHECKOUT_REQUEST } from './cart';
 
 const { toast } = createStandaloneToast();
 
 const TOAST_SHOW_TIME_IN_MILLISECONDS = 2000;
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* fetchListCategoriesRequest(action) {
+function* loadCheckout(action) {
   try {
     toast({
       title: 'Loading categories.',
@@ -52,18 +42,8 @@ function* fetchListCategoriesRequest(action) {
   Allows concurrent fetches of user.
 */
 
-function* categoriesSagas() {
-  const task = yield takeLatest(
-    GET_LIST_CATEGORIES,
-    fetchListCategoriesRequest,
-  );
-  yield takeLatest(addAllCategories, () => task.cancel());
+function* cartSagas() {
+  yield takeLatest(LOAD_CHECKOUT_REQUEST, loadCheckout);
 }
 
-// export default billingPanelSagas;
-
-// function* mySaga() {
-//   yield takeEvery(GET_LIST_CATEGORIES, fetchCategoriesSaga);
-// }
-
-export default categoriesSagas;
+export default cartSagas;

@@ -2,7 +2,7 @@ import Header from 'components/Header';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { GET_CATEGORY } from 'store/reducers/categories';
+import { GET_CATEGORY } from 'store/categories/reducer';
 
 import Item from 'components/Item';
 import Button from 'components/Button';
