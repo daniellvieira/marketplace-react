@@ -1,11 +1,12 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 
 export const LOAD_CHECKOUT_REQUEST = createAction('cart/LOAD_CHECKOUT');
+export const FINISH_CHECKOUT_REQUEST = createAction('cart/FINISH_CHECKOUT');
 
 const INITIAL_STATE = { data: [], total: 0 };
 
 export const cartSlice = createSlice({
-  name: 'categories',
+  name: 'cart',
   initialState: INITIAL_STATE,
   reducers: {
     // https://redux-toolkit.js.org/usage/immer-reducers

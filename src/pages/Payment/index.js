@@ -4,9 +4,13 @@ import Header from 'components/Header';
 import Select from 'components/Select';
 import Button from 'components/Button';
 
-import S from './Payment.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { LOAD_CHECKOUT_REQUEST } from 'store/cart/reducer';
+import {
+  FINISH_CHECKOUT_REQUEST,
+  LOAD_CHECKOUT_REQUEST,
+} from 'store/cart/reducer';
+
+import S from './Payment.module.scss';
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState('-');
@@ -21,6 +25,10 @@ const Payment = () => {
     if (cardId === '-') return setPaymentMethod('-');
 
     setPaymentMethod(user.cards.find((card) => card.id === cardId));
+  };
+
+  const handleFinish = () => {
+    dispatch(FINISH_CHECKOUT_REQUEST({ totalWithTax, paymentMethod }));
   };
 
   useEffect(() => {
@@ -64,7 +72,12 @@ const Payment = () => {
           <p>Total + Tax: R$ {totalWithTax.toFixed(2)}</p>
         </div>
         <div className={S.finish}>
-          <Button>Finish</Button>
+          <Button
+            disabled={totalWithTax === 0 || paymentMethod === '-'}
+            onClick={handleFinish}
+          >
+            Finish
+          </Button>
         </div>
       </div>
     </div>

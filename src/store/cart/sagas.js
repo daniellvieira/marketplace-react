@@ -3,6 +3,7 @@ import { createStandaloneToast } from '@chakra-ui/react';
 import {
   changeAmount,
   changeCart,
+  FINISH_CHECKOUT_REQUEST,
   LOAD_CHECKOUT_REQUEST,
   updateTotal,
 } from './reducer';
@@ -10,6 +11,7 @@ import usersService from 'services/users';
 import cardsService from 'services/cards';
 import bandsService from 'services/bands';
 import { addUser } from 'store/user/reducer';
+import { deleteItem } from 'store/reducers/items';
 
 const { toast } = createStandaloneToast();
 const TOAST_SHOW_TIME_IN_MILLISECONDS = 2000;
@@ -53,6 +55,36 @@ function* updateCheckoutTotal(action) {
   } catch (e) {
     toast({
       title: 'An error occurred.',
+      description: 'In updateCheckoutTotal',
+      status: 'error',
+      duration: TOAST_SHOW_TIME_IN_MILLISECONDS,
+      isClosable: true,
+    });
+  }
+}
+
+function* finishCheckout(action) {
+  try {
+    const { totalWithTax, paymentMethod } = action.payload;
+
+    if (totalWithTax > paymentMethod.balance) {
+      return yield toast({
+        title: `Insufficient balance in card ${paymentMethod.name}.`,
+        status: 'error',
+        duration: TOAST_SHOW_TIME_IN_MILLISECONDS,
+        isClosable: true,
+      });
+    }
+
+    yield toast({
+      title: 'Checkout made successfully.',
+      status: 'success',
+      duration: TOAST_SHOW_TIME_IN_MILLISECONDS,
+      isClosable: true,
+    });
+  } catch (e) {
+    toast({
+      title: 'An error occurred.',
       status: 'error',
       duration: TOAST_SHOW_TIME_IN_MILLISECONDS,
       isClosable: true,
@@ -67,6 +99,8 @@ function* updateCheckoutTotal(action) {
 function* cartSagas() {
   yield takeLatest(LOAD_CHECKOUT_REQUEST, loadCheckout);
   yield takeEvery([changeAmount, changeCart], updateCheckoutTotal);
+  yield takeLatest(FINISH_CHECKOUT_REQUEST, finishCheckout);
+  yield takeLatest(deleteItem, updateCheckoutTotal);
 }
 
 export default cartSagas;

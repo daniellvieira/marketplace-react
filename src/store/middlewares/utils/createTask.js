@@ -16,8 +16,8 @@ const createTask = async ({ fork, dispatch, action, search, messages }) => {
   });
 
   const task = fork(async (forkApi) => {
-    const TIME_IN_MILLISECONDS = 1000;
-    await forkApi.delay(TIME_IN_MILLISECONDS);
+    // const TIME_IN_MILLISECONDS = 1000;
+    // await forkApi.delay(TIME_IN_MILLISECONDS);
 
     return await search();
   });

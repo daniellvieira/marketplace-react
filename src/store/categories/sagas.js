@@ -1,4 +1,4 @@
-import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   addAllCategories,
   GET_LIST_CATEGORIES,
@@ -19,7 +19,6 @@ function* fetchListCategoriesRequest(action) {
       duration: TOAST_SHOW_TIME_IN_MILLISECONDS,
       isClosable: true,
     });
-    yield delay(1000);
 
     const categories = yield call(categoriesService.search);
     toast({

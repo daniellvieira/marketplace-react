@@ -15,7 +15,7 @@ const Cart = () => {
     const cartReduce = state.cart.data.reduce((items, itemInCart) => {
       const item = state.items.find((item) => item.id === itemInCart.id);
 
-      if (item.title.match(regexp)) {
+      if (item?.title.match(regexp)) {
         items.push({
           ...item,
           amount: itemInCart.amount,

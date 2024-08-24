@@ -78,11 +78,13 @@ const Item = (props) => {
         [S.itemInCart]: cart,
       })}
     >
-      <AiFillCloseCircle
-        {...iconProps}
-        className={`${S['item-action']} ${S['item-delete']}`}
-        onClick={() => dispatch(deleteItem(id))}
-      />
+      {!cart && (
+        <AiFillCloseCircle
+          {...iconProps}
+          className={`${S['item-action']} ${S['item-delete']}`}
+          onClick={() => dispatch(deleteItem(id))}
+        />
+      )}
 
       <div className={S['item-image']}>
         <img src={photo} alt={title} />
