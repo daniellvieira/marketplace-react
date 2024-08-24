@@ -14,7 +14,7 @@ import { addUser } from 'store/user/reducer';
 const { toast } = createStandaloneToast();
 const TOAST_SHOW_TIME_IN_MILLISECONDS = 2000;
 
-const loggedUserId = 1;
+const loggedUserId = 2;
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* loadCheckout(action) {
